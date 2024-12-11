@@ -1,0 +1,25 @@
+# Gradle build artifacts
+build/
+.gradle/
+gradlew
+gradlew.bat
+
+# IDE-specific files
+.idea/
+*.iml
+
+# Compiled class files
+*.class
+
+# Log files
+*.log
+
+# Package files
+*.jar
+*.war
+*.ear
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
