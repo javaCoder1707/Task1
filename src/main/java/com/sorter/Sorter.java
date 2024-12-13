@@ -20,16 +20,16 @@ public class Sorter {
             System.out.println(this.pathsOfFiles);
     }
 
-    public List<String> sort() throws IOException {
-        divideFiles();
-        if(!isCycle(this.requireFiles)) {
+    public List<String> sort() throws IOException { 
+        divideFiles();                             //разделяем файлы на основе наличия require
+        if(!isCycle(this.requireFiles)) {          //проверка на цикличность
             Map<Integer, String> supposedToBeAddedFiles = new HashMap<>();
             int i = 1;
             for (String rf : requireFiles) {
-                List<String> dependedFiles = getDependedFiles(rf);
+                List<String> dependedFiles = getDependedFiles(rf); //получаем файлы от которых зависит переданный в качестве аргумента файл
 
                 for (String nrf : noRequireFiles) {
-                    if (nrf.contains(dependedFiles.get(dependedFiles.size() - 1))) {
+                    if (nrf.contains(dependedFiles.get(dependedFiles.size() - 1))) { //проверяем имеется ли файл в итоговом списке если да то добовляем зависимый от него файл за ним в список
                         supposedToBeAddedFiles.put(noRequireFiles.indexOf(nrf) + i, rf);
                         i += 1;
                         break;
@@ -43,7 +43,7 @@ public class Sorter {
         }
 
 
-        return correctPathsNames(noRequireFiles);
+        return correctFilesNames(noRequireFiles); //изменение ввывода наименований файлов
     }
 
     private void divideFiles() throws IOException {
@@ -58,11 +58,11 @@ public class Sorter {
         }
     }
 
-    public static List<String> correctPathsNames(List<String> paths){
+    public static List<String> correctFilesNames(List<String> paths){
         List<String> changedList = new ArrayList<>();
 
         for (String p : paths) {
-            int index = p.indexOf("TZ")+"TZ\\".length();
+            int index = p.indexOf("MAIN_DIRECTORY")+"MAIN_DIRECTORY\\".length();
             changedList.add(p.substring(index));
         }
         return changedList;
