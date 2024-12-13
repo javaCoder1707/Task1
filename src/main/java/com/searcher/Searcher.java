@@ -16,14 +16,11 @@ public class Searcher {
 
     public List<String> search() {
         try {
-            List<String> textFiles = Files.walk(this.mainDirectory)
+            return Files.walk(this.mainDirectory)
                     .filter(Files::isRegularFile) // Фильтруем только обычные файлы
                     .map(Path::toString) // Преобразуем Path в String
                     .filter(s -> s.toLowerCase().endsWith(".txt")) // Фильтруем только .txt файлы
                     .collect(Collectors.toList());
-
-            textFiles.forEach(System.out::println);
-            return textFiles;
         } catch (IOException e) {
             System.err.println("Ошибка при поиске файлов: " + e.getMessage());
         }
