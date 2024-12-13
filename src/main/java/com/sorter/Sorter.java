@@ -23,21 +23,21 @@ public class Sorter {
     public List<String> sort() throws IOException {
         divideFiles();
         if(!isCycle(this.requireFiles)) {
-            Map<Integer, String> supposeToBeAddedFiles = new HashMap<>();
+            Map<Integer, String> supposedToBeAddedFiles = new HashMap<>();
             int i = 1;
             for (String rf : requireFiles) {
                 List<String> dependedFiles = getDependedFiles(rf);
 
                 for (String nrf : noRequireFiles) {
                     if (nrf.contains(dependedFiles.get(dependedFiles.size() - 1))) {
-                        supposeToBeAddedFiles.put(noRequireFiles.indexOf(nrf) + i, rf);
+                        supposedToBeAddedFiles.put(noRequireFiles.indexOf(nrf) + i, rf);
                         i += 1;
                         break;
                     }
                 }
             }
-            for (Integer index : supposeToBeAddedFiles.keySet()) {
-                String file = supposeToBeAddedFiles.get(index);
+            for (Integer index : supposedToBeAddedFiles.keySet()) {
+                String file = supposedToBeAddedFiles.get(index);
                 noRequireFiles.add(index, file);
             }
         }
